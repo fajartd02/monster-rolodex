@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
@@ -16,6 +16,12 @@ const App = () => {
   const filteredMonsters = monsters.filter((monster) => {
     return monster.name.toLocaleLowerCase().includes(searchField);
   });
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => setMonsters(users));
+  }, []);
 
   return (
     <div className="App">
